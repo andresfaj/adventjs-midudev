@@ -3,22 +3,20 @@ function getGiftsToRefill(a1, a2, a3) {
 
   const giftsToBuy = allGifts.reduce((preValue, currentValue, index) => {
     if (index < a1.length) {
-      return { ...preValue, [`${currentValue}`]: 1 };
+      return Object.assign(preValue, { [currentValue]: 1 });
     } else if (index >= a1.length && index < a1.length + a2.length) {
-      return {
-        ...preValue,
-        [`${currentValue}`]:
-          preValue[`${currentValue}`] && a1.includes(currentValue) ? 2 : 1,
-      };
+      return Object.assign(preValue, {
+        [currentValue]:
+          preValue[currentValue] && a1.includes(currentValue) ? 2 : 1,
+      });
     } else {
-      return {
-        ...preValue,
-        [`${currentValue}`]:
+      return Object.assign(preValue, {
+        [currentValue]:
           preValue[currentValue] &&
           (a1.includes(currentValue) || a2.includes(currentValue))
             ? 2
             : 1,
-      };
+      });
     }
   }, {});
 
